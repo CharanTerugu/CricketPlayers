@@ -1,0 +1,48 @@
+
+    
+
+<app-admin-nav-bar></app-admin-nav-bar>
+<body>
+<div class="container">
+    
+    <div class="form">
+    <h2 id="team">Update Player Details</h2>
+    <h2 style="color: red; font-style: italic;">{{this.msg}}</h2>
+    <form  (ngSubmit)="onSubmit()">
+    <label for="name">Player Name</label>
+    <div class="form-group">
+    <input type="text" id="name" name="name"  [(ngModel)]="play.name" class="form-control" >
+    
+</div>
+    
+    <label for="category">Category</label>
+    <div class="form-group">
+    <input type="text" id="category" name="category"class="form-control" [(ngModel)]="play.category">
+    
+</div>
+
+
+<label for="country">Country</label>
+<div class="form-group">
+<input type="text" id="country" name="country" class="form-control" [(ngModel)]="play.country">
+
+</div>
+<label for="age">Age</label>
+<div class="form-group">
+<input type="number" id="age" name="age" class="form-control" [(ngModel)]="play.age">
+
+</div>
+<label for="bidprice">BidPrice</label>
+<div class="form-group">
+<input type="number" name="bidprice"id="bidprice" class="form-control" [(ngModel)]="play.bidPrice">
+
+</div>
+<br>
+<input clas="btn btn-success"type="submit" value="save" id="btn">
+ 
+</form>
+   </div>
+
+</div>
+</body>
+

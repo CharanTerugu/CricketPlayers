@@ -1,0 +1,71 @@
+
+
+.container{
+    width: 1398px;
+  }
+  .item{
+              float: left;
+              margin: 3px;
+              overflow: hidden;
+              border-color: yellow;
+              width: 360px;
+              height: 260px;
+              background-color:rgb(210, 131, 131);
+              text-align: center;
+              margin-top: 10%;
+              background-image: url('/assets/team/t.jpg');
+              
+  }
+         
+          .item2 {
+            float: left;
+            margin: 3px;
+            overflow: hidden;
+            border-color: yellow;
+           
+            background-color:rgb(210, 131, 131);
+            text-align: center;
+            margin-top: 10%;
+              width: 360px;
+              height: 260px; 
+              background-image: url('/assets/team/th.jpg');
+          }
+          .item3{
+            float: left;
+            margin: 3px;
+            overflow: hidden;
+            border-color: yellow;
+           
+            background-color:rgb(210, 131, 131);
+            text-align: center;
+            margin-top: 10%;
+              width: 360px;
+              height: 260px; 
+              background-image: url('/assets/team/download.jpg');
+          }
+          .item4{
+            float: left;
+            margin: 3px;
+            overflow: hidden;
+            border-color: yellow;
+            width: 360px;
+            height: 360px;
+            background-color:rgb(210, 131, 131);
+            text-align: center;
+            margin-top: 10%;
+              margin-left: -463px;
+              margin-top: 236px;
+          }
+          h1{
+            
+            color:rgb(13, 237, 35);
+            width: 10cm;
+             border-color: black;
+             border-width: 10cm;
+             text-shadow: 20%;
+              font-style: italic;
+          text-decoration: aqua;
+          }
+       body{
+        background-color: rgb(41, 56, 58);
+       }

@@ -1,0 +1,25 @@
+.center{
+   
+    text-align: center;
+    margin-left: 47%;
+    margin-right: 45%;
+    margin-top: 5%;
+    border: black;
+}
+.container{
+    text-align: center;
+    width: 500px;
+    height: 200px;
+    padding-top: 100px;
+}
+.btn-1{
+  
+    text-align: center;
+    margin-left: 45%;
+    margin-right: 45%;
+    margin-top: 2%;
+    border: black;
+  }
+    body{
+        background-color: blanchedalmond;
+    }

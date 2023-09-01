@@ -1,0 +1,23 @@
+<body>
+  
+
+<app-navbar></app-navbar>
+
+<table class="center "> 
+    <tr>
+      <th>Sl No</th>
+      <th>Team Id</th>
+         <th >Team Name</th>
+         <th >Budget</th>
+         
+        </tr>
+      <tr  *ngFor="let n of demo;index as i" >
+        <td>{{i+1}}</td>
+        <td>{{n.id}}</td>
+        <td >{{n.teamName}}  </td>
+         <td >{{n.budget}}</td>
+        </tr>
+       
+    </table>
+    <button class=" btn-1 btn-danger" type="button" routerLink="/dashboard">Back</button>
+  </body>

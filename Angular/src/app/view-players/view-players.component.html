@@ -1,0 +1,29 @@
+<div class="by">
+  
+
+<app-admin-nav-bar></app-admin-nav-bar>
+<table class="center "> 
+    <tr>
+      <th>Sl No</th>
+      <th>Player Id</th>
+         <th >Player Name</th>
+         <th >Category</th>
+         <th>Country</th>
+         <th>Age</th>
+         <th>Bid Price</th>
+         <th colspan="2">Actions</th>
+        </tr>
+      <tr  *ngFor="let p of player;index as i" >
+        <td>{{i+1}}</td>
+        <td>{{p.id}}</td>
+        <td >{{p.name}}  </td>
+         <td >{{p.category}}</td>
+         <td>{{p.country}}</td>
+         <td>{{p.age}}</td>
+         <td>{{p.bidPrice}}</td>
+        <td> <button class="  btn-success" type="button" routerLink="/updatePlayer/{{p.id}}">Update</button></td>
+         <td><button class="  btn-danger" type="button" (click)="delete(p.id)" >Delete</button></td>
+         </tr>
+         </table>
+         <button class="btn-1 btn-danger"  type="submit" routerLink="/showteam">back</button>
+</div>

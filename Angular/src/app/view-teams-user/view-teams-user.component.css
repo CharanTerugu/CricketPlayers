@@ -1,0 +1,47 @@
+.center{
+    margin-left: auto;
+    margin-right: auto;
+    color: black;
+    background-color: burlywood;
+    margin-top: 100px;
+    row-gap: 20px;
+    column-gap: 30px;
+
+}
+th, td {
+  padding: 15px;
+}
+
+.btn-1{
+  
+  text-align: center;
+  margin-left: 50%;
+  margin-right: 45%;
+  
+  border: black;
+}
+
+table {
+  border-spacing: 30px;
+}
+th, td {
+  padding: 20px;
+  text-align: center; 
+
+}
+table, th, td {
+  border: 2px solid rgb(246, 243, 243);
+  border-collapse: collapse;
+  border-radius: 10px;
+}
+
+.card-header
+{
+  color: brown;
+  font-size: large;
+  font-weight: bolder;
+  background-color: aliceblue;
+}
+body{
+  background-color: aquamarine;
+}

@@ -1,0 +1,17 @@
+.spacer{
+    flex:1 1 auto;
+}
+ul{
+    list-style-type: disc;
+    margin: 10px 10px;
+    padding: 10px 12px;
+    overflow: hidden;
+    width: 100%;
+    left:0;
+
+}
+li{
+    float: right;
+    display: inline-flex;
+    padding: 10px;
+}

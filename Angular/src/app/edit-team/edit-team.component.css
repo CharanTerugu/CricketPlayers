@@ -1,0 +1,35 @@
+.center{
+   
+    text-align: center;
+    margin-left: 47%;
+    margin-right: 45%;
+    margin-top: 5%;
+    border: black;
+}
+.container{
+    text-align: center;
+    width: 500px;
+    height: 200px;
+    padding-top: 100px;
+}
+.btn-1{
+  
+    text-align: center;
+    margin-left: 48%;
+    margin-right: 45%;
+    margin-top: 15%;
+    border: black;
+  }
+    body{
+        background-color:aquamarine;
+    }
+
+    .btn{
+        background-color:rgb(244, 11, 11);
+        text-align: center;
+        margin-left: 47%;
+        margin-right: 45%;
+        margin-top: 1%;
+        border: black;
+      }
+      

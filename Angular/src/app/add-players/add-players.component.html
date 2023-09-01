@@ -1,0 +1,40 @@
+
+
+<div class="container">
+    <div class="form">
+    <h2 id="team">Enter Player Details</h2>
+    <form  (ngSubmit)="onSubmit()">
+    <label for="name">Player Name</label>
+    <div class="form-group">
+    <input type="text" id="name" name="name"  [(ngModel)]="player.name" class="form-control" >
+    
+</div>
+    
+    <label for="category">Category</label>
+    <div class="form-group">
+    <input type="text" id="category" name="country"class="form-control" [(ngModel)]="player.category">
+    
+</div>
+
+
+<label for="country">Country</label>
+<div class="form-group">
+<input type="text" id="country" name="country" class="form-control" [(ngModel)]="player.country">
+
+</div>
+<label for="age">Age</label>
+<div class="form-group">
+<input type="number" id="age" name="age" class="form-control" [(ngModel)]="player.age">
+
+</div>
+<label for="bidprice">BidPrice</label>
+<div class="form-group">
+<input type="number" name="bidprice"id="bidprice" class="form-control" [(ngModel)]="player.bidPrice">
+
+</div>
+<br>
+<input clas="btn btn-success"type="submit" value="Submit" id="btn">
+ 
+</form>
+   </div>
+</div>

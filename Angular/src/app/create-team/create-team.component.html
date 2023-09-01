@@ -1,0 +1,35 @@
+
+<body>
+    
+<app-admin-nav-bar></app-admin-nav-bar>
+<div class="container">
+    <div class="form">
+    <h2 id="team">Enter Team Details</h2>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <label for="teamName">Team Name</label>
+    <div class="form-group">
+    <input type="text" id="teamName"[(ngModel)]="team.teamName" class="form-control"formControlName="teamName" [ngClass]="{'is-invalid': submitted && f['teamName'].errors }">
+    <div *ngIf="submitted && f['teamName'].errors" class="text-danger">
+        <div *ngIf="submitted&&f['teamName'].errors['required']">Name is required</div>
+        
+    </div>
+</div>
+    
+    <label for="budget">Budget</label>
+    <div class="form-group">
+    <input type="number" id="budget" class="form-control" [(ngModel)]="team.budget"formControlName="budget" [ngClass]="{ 'is-invalid': submitted && f['budget'].errors }">
+    <div *ngIf="submitted && f['budget'].errors" class="text-danger">
+        <div *ngIf="submitted && f['budget'].errors['required']">budget is required</div>
+      
+    </div>
+</div>
+<br>
+<input clas="btn btn-success"type="submit" value="Submit" id="btn">
+ 
+</form>
+<button class=" btn-1 btn-danger" type="button" routerLink="/adminDashboard">Back</button>
+   </div>
+   
+</div>
+</body>
+

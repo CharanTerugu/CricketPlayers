@@ -1,0 +1,34 @@
+<html>
+<div class="container">
+    <button class=" btn-danger" style="float: right;background-color:crimson;"routerLink="/login">User Login</button>
+
+    <div class="form">
+    <h2 id="login" >Admin Login</h2>
+    <div ><p style="color: red;">{{this.msg}}</p></div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <label for="uName" style="color: rgb(33, 245, 33);font-weight: bolder; font-size: larger;background-color:black">Admin id</label>
+    <div class="form-group">
+    <input type="text" id="uName" class="form-control"formControlName="name" [ngClass]="{'is-invalid': submitted && f['name'].errors }">
+    <div *ngIf="submitted && f['name'].errors" class="text-danger">
+        <div *ngIf="submitted&&f['name'].errors['required']">LogId is required</div>
+        <div *ngIf="submitted&&f['name'].errors['minlength']">Id must be min 5 characters </div>
+       
+    </div>
+</div>
+    
+    <label for="password" style="color: rgb(33, 245, 33);font-weight: bolder; font-size: larger;background-color:black;">Password</label>
+    <div class="form-group">
+    <input type="text" id="password" class="form-control" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }">
+    <div *ngIf="submitted && f['password'].errors" class="text-danger">
+        <div *ngIf="submitted && f['password'].errors['required']">Password is required</div>
+      
+        <div *ngIf="submitted &&f['password'].errors['pattern']">Password atleast one Uppercase  numerics and lowercase b/w 5-12</div>
+    </div>
+</div>
+<br>
+<input class="btn btn-success"type="submit" value="Submit" id="btn">
+ 
+</form>
+   </div>
+</div>
+</html>
