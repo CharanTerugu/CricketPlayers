@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { login } from './logincomponent/login';
 import { Observable,catchError , throwError} from 'rxjs';
 import { admin } from './adminlogin/admin';
+import { user } from './create-logins/User';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,19 +12,27 @@ import { admin } from './adminlogin/admin';
 export class LoginService {
 
 baseurl="http://localhost:8080"
-  constructor(private httpclient:HttpClient) { }
+  constructor(private httpclient:HttpClient,private router:Router) { }
 
 
   login(user:login):Observable<any>
   {
-    return this.httpclient.post(`${this.baseurl}/login`,user).pipe(catchError(this.handleError));
+    localStorage.clear();
+    return this.httpclient.post(`${this.baseurl}/any/user/authenticate`,user,{responseType:'text' as 'json'}).pipe(catchError(this.handleError));
   }
  
  admin(admin:admin):Observable<object>
  {
-  return this.httpclient.post(`${this.baseurl}/adminLogin`,admin).pipe(catchError(this.handleError));
+  return this.httpclient.post(`${this.baseurl}/any/user/authenticate`,admin,{responseType:'text' as 'json'}).pipe(catchError(this.handleError));
  }
    
+ createUser(teamId:number,user:user):Observable<object>{
+  return this.httpclient.post(`${this.baseurl}/admin/user/${teamId}`,user,{responseType:'text' as 'json'}).pipe(catchError(this.handleError));
+ }
+
+ logout():void{
+ this.router.navigate(['/login'])
+ }
 
   private handleError(error: HttpErrorResponse) {
 

@@ -1,0 +1,50 @@
+
+<app-admin-nav-bar></app-admin-nav-bar>
+<html>
+<div class="container">
+    <div class="form">
+    <h2 id="team">Register User</h2>
+    <form  (ngSubmit)="onSubmit()">
+    <label for="name">User Name</label>
+    <div class="form-group">
+    <input type="text" id="name" name="name"  [(ngModel)]="user.userName" class="form-control" >
+    
+</div>
+    
+    <label for="age">Age</label>
+    <div class="form-group">
+    <input type="number" id="age" name="age"class="form-control" [(ngModel)]="user.age">
+    
+</div>
+
+
+<label for="Email">Email-Id</label>
+<div class="form-group">
+<input type="text" id="email" name="email" class="form-control" [(ngModel)]="user.email">
+
+</div>
+<label for="password">password</label>
+<div class="form-group">
+<input type="password" id="password" name="password" class="form-control" [(ngModel)]="user.password">
+
+</div>
+<label for="roles">Roles</label>
+<div class="form-group">
+<input type="text" name="roles"id="roles" class="form-control" [(ngModel)]="user.roles">
+
+</div>
+<div>
+    <label for="teamDropDown">Select a Team:</label>
+    <select  id="teamDropDown"  (change)="onDropdownChange($event)">  
+        <option value="" disabled selected>Select an option</option>
+      <option [ngValue]="s.id" *ngFor="let s of fordemo"> {{s.teamName}} </option>  
+  </select>   
+</div>
+
+<br>
+<input clas="btn btn-success"type="submit" value="Submit" id="btn">
+ 
+</form>
+   </div>
+</div>
+</html>

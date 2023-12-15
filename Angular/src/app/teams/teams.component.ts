@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TeamsService } from '../teams.service';
 import { team } from '../create-team/team';
 import { Router } from '@angular/router';
+import { TeamDto } from './TeamDto';
 
 
 @Component({
@@ -11,7 +12,8 @@ import { Router } from '@angular/router';
 })
 export class TeamsComponent implements OnInit {
 
-  demo:team[]={} as team[];
+  demo:TeamDto[];
+  
   msg:String;
   constructor(private service:TeamsService,private router:Router)
   {
@@ -19,8 +21,11 @@ export class TeamsComponent implements OnInit {
   }
   ngOnInit()
   {
- this.service.getTeams().subscribe((data)=>{
-  this.demo=data;
+ this.service.getOnlyTeams().subscribe((data)=>{
+  
+  this.demo=data
+  console.log(typeof data)
+  console.log(typeof this.demo)
   console.log(this.demo);
  });
   }
@@ -36,5 +41,6 @@ export class TeamsComponent implements OnInit {
       alert(this.msg);
     }
     );
+   
   }
 }

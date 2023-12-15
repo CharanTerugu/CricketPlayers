@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,10 +19,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cricket.project.Dto.TeamDto;
 import com.cricket.project.Exception.TeamAlreadyExsist;
 import com.cricket.project.Exception.TeamNotFound;
 import com.cricket.project.entity.Teams;
 import com.cricket.project.service.TeamsService;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -30,10 +34,11 @@ public class TeamController {
 	TeamsService ts;
 	
 	
-	@GetMapping("/teams/{id}")
-	ResponseEntity<?> getDetails(@PathVariable int id)
+	@GetMapping("/common/teams/{id}")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+	ResponseEntity<?> getDetails(@PathVariable int id )
 	{
-		Teams team=new Teams();
+		TeamDto team=new TeamDto();
 		try 
 		{
 			team=ts.find(id);
@@ -50,7 +55,8 @@ public class TeamController {
 		return new ResponseEntity<>("No Team Found",HttpStatus.NOT_FOUND);
 	}
 	
-	@GetMapping("teams/name/{name}")
+	@GetMapping("common/teams/name/{name}")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
 	ResponseEntity<?> getTeam(@PathVariable String name)
 	{
 		try
@@ -68,7 +74,8 @@ public class TeamController {
 		}
 		return new ResponseEntity<>("Team Not Found",HttpStatus.NOT_FOUND);
 	}
-	@PostMapping("/team")
+	@PostMapping("/admin/team")
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	ResponseEntity<?> addTeam(@RequestBody Teams team)
 	{
 		try
@@ -85,14 +92,16 @@ public class TeamController {
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
 
-	@GetMapping("/allTeams")
-	List<Teams> getAll()
+	@GetMapping("common/allTeams")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+	List<TeamDto> getAll()
 	{
 		
 		return ts.getTeams();
 	}
 	
-	@PutMapping("/Team/{id}")
+	@PutMapping("admin/Team/{id}")
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	ResponseEntity<?> update(@PathVariable int id,@RequestBody Teams team)
 	{
 		try {
@@ -104,7 +113,8 @@ public class TeamController {
 		return  new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
 	
-	@DeleteMapping("/Team/{id}")
+	@DeleteMapping("admin/Team/{id}")
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	ResponseEntity<?> delete(@PathVariable int id)
 	{
 		try {
@@ -116,5 +126,31 @@ public class TeamController {
 		}
 		
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
+	}
+	
+	@GetMapping("/user/myteam")
+	@PreAuthorize("hasAuthority('ROLE_USER')")
+	ResponseEntity<TeamDto> myTeam(HttpServletRequest request){
+		try {
+		TeamDto team=ts.getMyTeam(request.getUserPrincipal().getName());
+		return new ResponseEntity<>(team,HttpStatus.OK);
+		}
+		catch (TeamNotFound e) {
+			// TODO: handle exception
+			return new ResponseEntity(e.getMessage(),HttpStatus.NOT_FOUND);
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	
+	@GetMapping("admin/available/teams")
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+	List<TeamDto> getAvailableTeams()
+	{
+		
+		return ts.getAvailableTeams();
 	}
 }

@@ -2,10 +2,12 @@ package com.cricket.project.serviceimpl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.cricket.project.Dto.TeamDto;
 import com.cricket.project.Dto.TeamPlayerDto;
 import com.cricket.project.Exception.NotEnoughAmount;
 import com.cricket.project.Exception.PlayerAlreadyExsists;
@@ -13,10 +15,12 @@ import com.cricket.project.Exception.PlayerNotFound;
 import com.cricket.project.Exception.TeamNotFound;
 import com.cricket.project.entity.Cricketer;
 import com.cricket.project.entity.Teams;
+import com.cricket.project.entity.User;
 import com.cricket.project.mail.MailSenderService;
 import com.cricket.project.repositories.CricketerRepository;
 import com.cricket.project.service.CricketService;
 import com.cricket.project.service.TeamsService;
+import com.cricket.project.service.UserService;
 
 import jakarta.mail.MessagingException;
 @Component
@@ -28,6 +32,8 @@ public class CricketServiceImpl implements CricketService {
 TeamsService ts;
 @Autowired
 MailSenderService service;
+@Autowired 
+UserService userService;
 	@Override
 	public void addDetails(int id,Cricketer data) throws TeamNotFound, PlayerAlreadyExsists, NotEnoughAmount {
 		// TODO Auto-generated method stub
@@ -47,7 +53,7 @@ MailSenderService service;
 		else if(d+data.getBidPrice()<=ts.getBudget(id))
 		{
 			
-		Teams team =ts.find(id);
+		Teams team =ts.findById(id);
 		data.setTeams(team);
 		
 		repo.save(data);
@@ -132,7 +138,7 @@ MailSenderService service;
 			throw new PlayerNotFound("player Not Found");
 		}
 		Cricketer player=repo.getByName(name);
-		Teams team=ts.find(player.getTeams().getId());
+		Teams team=ts.findById(player.getTeams().getId());
 		return team.getTeamName();
 	}
 
@@ -166,16 +172,29 @@ MailSenderService service;
 	}
 
 	@Override
-	public void addPlayerToTeam(int tid, int pid) throws TeamNotFound,MessagingException {
+	public void addPlayerToTeam(int tid, int pid) throws TeamNotFound,MessagingException, NotEnoughAmount {
 		// TODO Auto-generated method stub
 		Cricketer player=repo.getById(pid);
-		Teams team=ts.find(tid);
+		Teams team=ts.findById(tid);
+		double totalAmountSpent=repo.getTotalSpends(tid);
+		
+		if(totalAmountSpent+player.getBidPrice()<=team.getBudget())
+		{
+			
 		player.setTeams(team);
-		
-		String to=player.getMailId();
-		
 		repo.save(player);
-		service.sendsimpleEmail(to, player.getName()+"your sold to "+player.getTeams().getTeamName(), "Bid Successfull");
+		}
+		else
+		{
+			throw new NotEnoughAmount("cant buy a Player,insufficent amount");
+		}
+		
+//		player.setTeams(team);
+//		
+//		String to=player.getMailId();
+//		
+//		repo.save(player);
+	//	service.sendsimpleEmail(to, player.getName()+"your sold to "+player.getTeams().getTeamName(), "Bid Successfull");
 		
 		
 	}
@@ -186,6 +205,14 @@ MailSenderService service;
 		Cricketer c=repo.getById(id);
 		c.setTeams(null);
 		repo.deleteById(c.getId());
+	}
+
+	@Override
+	public List<Cricketer> getMyPlayers(String userName) throws TeamNotFound {
+		// TODO Auto-generated method stub
+		TeamDto team=ts.getMyTeam(userName);
+	return repo.getPlayers(team.getId());
+		
 	}
 
 	

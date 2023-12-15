@@ -11,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity(name = "teams")
 public class Teams {
@@ -25,46 +26,74 @@ public class Teams {
 	@JsonIgnoreProperties
 	List<Cricketer> players=new ArrayList<>();
 	
-	
+	@OneToOne
+	User user;
 	
 	
 	public Teams() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Teams(int id, String teamName, List<Cricketer> players,double budget) {
+
+
+	public Teams(int id, String teamName, double budget, List<Cricketer> players, User user) {
 		super();
 		this.id = id;
 		this.teamName = teamName;
+		this.budget = budget;
 		this.players = players;
-		this.budget=budget;
+		this.user = user;
 	}
+
+
 	public int getId() {
 		return id;
 	}
+
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
+
 	public String getTeamName() {
 		return teamName;
 	}
+
+
 	public void setTeamName(String teamName) {
 		this.teamName = teamName;
 	}
-	public List<Cricketer> getPlayers() {
-		return players;
-	}
-	public void setPlayers(List<Cricketer> players) {
-		this.players = players;
-	}
+
+
 	public double getBudget() {
 		return budget;
 	}
+
+
 	public void setBudget(double budget) {
 		this.budget = budget;
 	}
-	
-	
+
+
+	public List<Cricketer> getPlayers() {
+		return players;
+	}
+
+
+	public void setPlayers(List<Cricketer> players) {
+		this.players = players;
+	}
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 	
 	
 }

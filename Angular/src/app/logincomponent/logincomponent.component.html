@@ -13,7 +13,7 @@
     <input type="text" id="uName" class="form-control"formControlName="userName" [ngClass]="{'is-invalid': submitted && f['userName'].errors }">
     <div *ngIf="submitted && f['userName'].errors" class="text-danger">
         <div *ngIf="submitted&&f['userName'].errors['required']">Name is required</div>
-        <div *ngIf="submitted&&f['userName'].errors['minlength']">Name must be min 5 characters </div>
+        <!-- <div *ngIf="submitted&&f['userName'].errors['minlength']">Name must be min 5 characters </div> -->
        
     </div>
 </div>

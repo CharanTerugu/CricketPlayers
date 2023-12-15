@@ -41,6 +41,7 @@ constructor(private service:TeamsService,private formbuilder:FormBuilder,private
          this.router.navigate(['/showteam'])
     },
     (error)=>{
+      console.log(error)
 this.msg=error.error.text
 console.log(this.msg)
       console.log(error.error)

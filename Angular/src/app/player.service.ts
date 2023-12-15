@@ -13,40 +13,44 @@ baseUrl="http://localhost:8080";
   constructor(private http:HttpClient) { }
 
   addPlayer(id:number,player:player):Observable<object>{
-    return this.http.post(`${this.baseUrl}/cricketer/${id}`,player).pipe(catchError(this.handleError));
+    return this.http.post(`${this.baseUrl}/admin/cricketer/${id}`,player).pipe(catchError(this.handleError));
   }
 
   getPlayersByTeamId(id:number):Observable<player[]>{
-    return this.http.get<player[]>(`${this.baseUrl}/players/${id}`).pipe(catchError(this.handleError));
+    return this.http.get<player[]>(`${this.baseUrl}/common/players/${id}`).pipe(catchError(this.handleError));
   }
 
   getPlayer(id:number):Observable<player>{
-    return this.http.get<player>(`${this.baseUrl}/player/${id}`);
+    return this.http.get<player>(`${this.baseUrl}/common/player/${id}`);
   }
 
   update(id:number,player:player):Observable<object>{
-    return this.http.put(`${this.baseUrl}/edit/${id}`,player).pipe(catchError(this.handleError));
+    return this.http.put(`${this.baseUrl}/admin/edit/${id}`,player).pipe(catchError(this.handleError));
   }
   deletePlayer(id:number):Observable<Object>{
-    return this.http.delete(`${this.baseUrl}/deletePlayer/${id}`);
+    return this.http.delete(`${this.baseUrl}/admin/deletePlayer/${id}`);
   }
   delete(id:number):Observable<object>{
-    return this.http.delete(`${this.baseUrl}/delete/${id}`);
+    return this.http.delete(`${this.baseUrl}/user/delete/${id}`);
   }
   addcrickter(player:player):Observable<object>{
-    return this.http.post(`${this.baseUrl}/addPlayer`,player).pipe(catchError(this.handleError));
+    return this.http.post(`${this.baseUrl}/admin/addPlayer`,player,{responseType:'text' as 'json'}).pipe(catchError(this.handleError));
   }
 
   getUnsoldPlayers():Observable<player[]>{
-    return this.http.get<player[]>(`${this.baseUrl}/unAssignedPlayers`)
+    return this.http.get<player[]>(`${this.baseUrl}/common/unAssignedPlayers`)
   }
   getAllPlayers():Observable<playerTeam[]>{
-    return this.http.get<playerTeam[]>(`${this.baseUrl}/AllCricketers`)
+    return this.http.get<playerTeam[]>(`${this.baseUrl}/common/AllCricketers`)
   }
 
-  assignPlayer(tid:number,pid:number):Observable<Object>
+  assignPlayer(teamId:number,playerId:number):Observable<Object>
   {
-    return this.http.post(`${this.baseUrl}/assignPlayer/${tid}`,pid).pipe(catchError(this.handleError));
+    return this.http.post(`${this.baseUrl}/user/assignPlayer/${playerId}/${teamId}`,{}).pipe(catchError(this.handleError));
+  }
+
+  getMyPlayers():Observable<player[]>{
+    return this.http.get<player[]>(`${this.baseUrl}/user/myPlayers`)
   }
   private handleError(error: HttpErrorResponse) {
 

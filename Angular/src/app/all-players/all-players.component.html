@@ -11,23 +11,21 @@
          <th>Country</th>
          <th>Age</th>
          <th>Bid Price</th>
-         <th>Team Name</th>
-         <th>Actions</th>
+         
+         <th>Actions</th> 
         </tr>
       <tr  *ngFor="let p of player;index as i" >
         <td>{{i+1}}</td>
-        <td>{{p.pid}}</td>
+        <td>{{p.id}}</td>
         <td >{{p.name}}  </td>
          <td >{{p.category}}</td>
          <td>{{p.country}}</td>
          <td>{{p.age}}</td>
          <td>{{p.bidPrice}}</td>
-         <td *ngIf="p.teamName!=null;else next">{{p.teamName}}</td>
-         <ng-template #next>
-          <p style="color: red;font-style: italic; margin-top:14%; margin-left: 20%;">UnSold</p>
-          </ng-template>
-          <td *ngIf="p.teamName!=null">
-            <button type="submit" (click)="Delete(p.pid)" class="btn-danger">Release</button>
+         
+         
+          <td >
+            <button type="submit" (click)="Delete(p.id)" class="btn-danger">Release</button>
           </td>
          </table>
 

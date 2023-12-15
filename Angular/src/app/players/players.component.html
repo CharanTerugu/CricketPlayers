@@ -1,0 +1,35 @@
+<div class="pl">
+  <app-navbar></app-navbar>
+    
+    <p [(ngModel)]="msg" style="color: green; font-style: italic; margin-top: 3%; margin-left: 40%;">{{msg}}</p>
+    <table class="center "> 
+        <tr>
+          <th>Sl No</th>
+          <th>Player Id</th>
+             <th >Player Name</th>
+             <th >Category</th>
+             <th>Country</th>
+             <th>Age</th>
+             <th>Bid Price</th>
+             <th>Team Name</th>
+             
+            </tr>
+          <tr  *ngFor="let p of player;index as i" >
+            <td>{{i+1}}</td>
+            <td>{{p.pid}}</td>
+            <td >{{p.name}}  </td>
+             <td >{{p.category}}</td>
+             <td>{{p.country}}</td>
+             <td>{{p.age}}</td>
+             <td>{{p.bidPrice}}</td>
+             <td *ngIf="p.teamName!=null;else next">{{p.teamName}}</td>
+             <ng-template #next>
+              <p style="color: red;font-style: italic; margin-top:14%; margin-left: 20%;">UnSold</p>
+              </ng-template>
+              
+             </table>
+    
+             <button class=" btn-1 btn-danger" type="button" routerLink="/dashboard">Back</button> 
+    
+            
+            </div>   
