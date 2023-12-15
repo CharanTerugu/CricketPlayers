@@ -18,4 +18,5 @@ public interface CricketerRepository extends JpaRepository<Cricketer, Integer>  
 	Double getTotalSpends(int id);
 	@Query("select p from cricketer p where p.teams.id=null")
 	List<Cricketer> getUnAssigned();
+
 }

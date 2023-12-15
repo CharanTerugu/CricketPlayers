@@ -12,14 +12,14 @@ import { playerTeam } from './playerteam';
 })
 export class AllPlayersComponent {
 
-  player:playerTeam[]={} as playerTeam[];
+  player:player[]={} as player[];
   team:team[];
   msg:String;
 id:number;
 constructor(private service:PlayerService,private teamService:TeamsService){
 
 
-this.service.getAllPlayers().subscribe((data)=>{
+this.service.getMyPlayers().subscribe((data)=>{
   this.player=data;
   console.log(this.player)
 },(error)=>alert(error));

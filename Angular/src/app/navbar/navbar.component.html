@@ -3,17 +3,21 @@
         <a routerLink="/dashboard" class="btn btn-success" routerLinkActive="active">DashBoard</a>
     </li>
     <li >
-        <a routerLink="/viewPlayers" class="btn btn-primary" routerLinkActive="active">UnSold Players</a>
+        <a routerLink="/viewPlayers" class="btn btn-danger" routerLinkActive="active">UnSold Players</a>
     </li>
     <li >
-        <a routerLink="/user/Teams" class="btn btn-success" routerLinkActive="active">View Team</a>
+        <a routerLink="/user/Teams" class="btn btn-success" routerLinkActive="active">My Team</a>
     </li>
     <li >
-        <a routerLink="/allPlayers" class="btn btn-success" routerLinkActive="active">View All Players</a>
+        <a routerLink="/allPlayers" class="btn btn-success" routerLinkActive="active">My Players</a>
     </li>
+    <li >
+        <a routerLink="/user/players" class="btn btn-success" routerLinkActive="active">All Players</a>
+    </li>
+    
     <ul>
         <li>
-            <a routerLink="/" class="btn btn-danger" routerLinkActive="active">Logout</a>
+            <a routerLink="/" class="btn btn-danger" routerLinkActive="active" (click)="logout()">Logout</a>
         </li>
         
     </ul>

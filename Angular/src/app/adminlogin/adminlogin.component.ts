@@ -50,8 +50,9 @@ export class AdminloginComponent {
     }
     this.service.admin(this.admin).subscribe(
       (res:any)=>{
-       
-      alert("login Success")
+        localStorage.setItem('token',res)
+        console.log(res)
+      // alert("login Success")
       this.router.navigate(['/adminDashboard']);
     },(error)=>{
       console.log(error.error)

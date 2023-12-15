@@ -1,21 +1,24 @@
-<body>
+<!-- <body>
     
 
 <app-admin-nav-bar></app-admin-nav-bar>
 <div class="container">
     <div class="form">
-    <h2 id="login">Update Team</h2>
+    <h2 id="update">Update Team</h2>
     <form  (ngSubmit)="onSubmit()">
-    <label for="uName">Team Name</label>
-    <div class="form-group">
-    <input type="text"  class="form-control" name="teamName"[(ngModel)]="team.teamName">
-   
-</div>
+    <label>Team Name</label>
+
+       <div class="form-group">
+       
+           <input type="text"  class="form-control" name="Name" [(ngModel)]="team.teamName">
+       </div>
     
-    <label for="password">Budget</label>
-    <div class="form-group">
-    <input type="text"  class="form-control" name="budget" [(ngModel)]="team.budget">
-</div>
+    <label >Budget</label>
+        <div class="form-group">
+           
+    
+            <input type="number"  class="form-control" name="budget" [(ngModel)]="team.budget">
+       </div>
 <br>
 <input clas="btn btn-success"type="submit" value="Submit" id="btn">
  
@@ -23,4 +26,36 @@
    </div>
 </div>
 <button class="btn-1 btn-danger"  type="submit" routerLink="/showteam">back</button>
+</body> -->
+
+<body>
+
+<app-admin-nav-bar></app-admin-nav-bar>
+<div class="container">
+    <div class="form">
+    <h2 id="team">Update Team Details</h2>
+    <form  (ngSubmit)="onSubmit()">
+    <label for="name">Team Name</label>
+    <div class="form-group">
+    <input type="text" id="name" name="name"  [(ngModel)]="team.teamName" class="form-control" >
+    
+</div>
+    
+    <label for="budget">Budget</label>
+    <div class="form-group">
+    <input type="number" id="budget" name="budget"class="form-control" [(ngModel)]="team.budget">
+    
+</div>
+
+
+
+
+<input clas="btn btn-success"type="submit" value="Submit" id="btn">
+ 
+</form>
+   </div>
+   <div>
+   <button class="btn-1 btn-danger"  type="submit" routerLink="/showteam">back</button>
+</div>
+</div>
 </body>

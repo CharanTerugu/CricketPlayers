@@ -3,12 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import {JwtModule} from '@auth0/angular-jwt'
 import { LogincomponentComponent } from './logincomponent/logincomponent.component';
 import { CreateTeamComponent } from './create-team/create-team.component';
 import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TeamsComponent } from './teams/teams.component';
-import {HttpClientModule} from '@angular/common/http'
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http'
 import { LoginService } from './login.service';
 import { TeamsService } from './teams.service';
 import { EditTeamComponent } from './edit-team/edit-team.component';
@@ -28,6 +29,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import { AdminNavBarComponent } from './admin-nav-bar/admin-nav-bar.component';
 import { AdminAllPlayersComponent } from './admin-all-players/admin-all-players.component';
+import { AuthInterceptor } from './auth.interceptor';
+import { PlayersComponent } from './players/players.component';
+import { CreateLoginsComponent } from './create-logins/create-logins.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +51,9 @@ import { AdminAllPlayersComponent } from './admin-all-players/admin-all-players.
     ViewTeamsUserComponent,
     NavbarComponent,
     AdminNavBarComponent,
-    AdminAllPlayersComponent
+    AdminAllPlayersComponent,
+    PlayersComponent,
+    CreateLoginsComponent
   ],
   imports: [
     BrowserModule,
@@ -58,10 +64,17 @@ import { AdminAllPlayersComponent } from './admin-all-players/admin-all-players.
     HttpClientModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    JwtModule.forRoot({
+      config:{
+        tokenGetter:()=>{
+          return localStorage.getItem('token')
+        },
+      },
+    })
     
   ],
-  providers: [LoginService,TeamsService,PlayerService],
+  providers: [LoginService,TeamsService,PlayerService, {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

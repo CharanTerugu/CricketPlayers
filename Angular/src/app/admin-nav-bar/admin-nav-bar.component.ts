@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AdminNavBarComponent {
 
+  logout(){
+    localStorage.clear();
+    console.log("token"+localStorage.getItem('token'))
+  }
 }

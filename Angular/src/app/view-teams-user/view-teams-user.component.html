@@ -5,17 +5,18 @@
 
 <table class="center "> 
     <tr>
-      <th>Sl No</th>
+    
       <th>Team Id</th>
          <th >Team Name</th>
          <th >Budget</th>
          
         </tr>
-      <tr  *ngFor="let n of demo;index as i" >
-        <td>{{i+1}}</td>
-        <td>{{n.id}}</td>
-        <td >{{n.teamName}}  </td>
-         <td >{{n.budget}}</td>
+      <tr >
+       
+      
+        <td>{{demo.id}}</td>
+        <td >{{demo.teamName}}</td>
+        <td >{{demo.budget}}</td>
         </tr>
        
     </table>

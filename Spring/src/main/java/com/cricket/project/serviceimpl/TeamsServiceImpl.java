@@ -4,11 +4,14 @@ import java.lang.StackWalker.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
+import com.cricket.project.Dto.TeamDto;
+import com.cricket.project.Dto.TeamDtoConverter;
 import com.cricket.project.Exception.TeamAlreadyExsist;
 import com.cricket.project.Exception.TeamNotFound;
 import com.cricket.project.entity.Cricketer;
@@ -17,6 +20,8 @@ import com.cricket.project.repositories.CricketerRepository;
 import com.cricket.project.repositories.TeamsRepository;
 import com.cricket.project.service.CricketService;
 import com.cricket.project.service.TeamsService;
+
+import ch.qos.logback.core.pattern.Converter;
 @Component
 public class TeamsServiceImpl implements TeamsService{
 
@@ -27,13 +32,15 @@ public class TeamsServiceImpl implements TeamsService{
 CricketerRepository crepo;
 	
 	@Override
-	public Teams find(int id) throws TeamNotFound {
+	public TeamDto find(int id) throws TeamNotFound {
 		// TODO Auto-generated method stub
 		if(repo.findById(id).isEmpty())
 		{
 			throw new TeamNotFound("Team Not Found");
 		}
-		return repo.getById(id);
+		TeamDtoConverter coverter=new TeamDtoConverter();
+		
+		return coverter.convertToTeamDto(repo.getById(id));
 	}
 
 	@Override
@@ -71,11 +78,23 @@ CricketerRepository crepo;
 	}
 
 	@Override
-	public List<Teams> getTeams() {
+	public List<TeamDto> getTeams() {
 		// TODO Auto-generated method stub
 		
 		List<Teams> team=repo.findAll();
-		return repo.findAll();
+		
+		TeamDtoConverter converter=new TeamDtoConverter();
+//		List<TeamDto> teamDto=team.stream().map(a->{
+//			TeamDto dto=new TeamDto();
+//			dto.setId(a.getId());
+//			dto.setTeamName(a.getTeamName());
+//			dto.setBudget(a.getBudget());
+//			return dto;
+//			
+//		} ).collect(Collectors.toList());
+//		
+
+		return converter.convertToTeamDto(team);
 	}
 
 	@Override
@@ -85,6 +104,7 @@ CricketerRepository crepo;
 		Teams t=repo.getById(id);
 		t.setTeamName(team.getTeamName());
 		t.setBudget(team.getBudget());
+		
 		repo.save(t);
 	}
 
@@ -95,5 +115,53 @@ CricketerRepository crepo;
 		repo.deleteById(id);
 		
 	}
+
+	@Override
+	public Teams getTeamByUserId(int userId) {
+		// TODO Auto-generated method stub
+		return repo.getTeamByUserId(userId);
+	}
+
+	@Override
+	public void assignTeamToUser(Teams team) {
+		// TODO Auto-generated method stub
+		repo.save(team);
+	}
+
+	@Override
+	public TeamDto getMyTeam(String userName) throws TeamNotFound {
+		// TODO Auto-generated method stub
+		TeamDtoConverter converter=new TeamDtoConverter();
+		if(repo.getTeamByUserName(userName)==null) {
+			throw new TeamNotFound("No Team Found For this User");
+		}
+		else
+		return converter.convertToTeamDto( repo.getTeamByUserName(userName));
+	}
+
+	@Override
+	public Teams findById(int id) throws TeamNotFound {
+		// TODO Auto-generated method stub
+		if(repo.findById(id).isEmpty())
+		{
+			throw new TeamNotFound("Team Not Found");
+		}
+		
+		
+		return repo.getById(id);
+	}
+
+	@Override
+	public List<TeamDto> getAvailableTeams() {
+		// TODO Auto-generated method stub
+		
+		TeamDtoConverter teams=new TeamDtoConverter();
+		
+		return teams.convertToTeamDto(repo.getUnAssignedTeams())  ;
+	}
+	
+	
+	
+	
 
 }

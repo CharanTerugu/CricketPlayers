@@ -14,10 +14,13 @@
     <li >
         <a routerLink="/admin/AllPlayers" class="btn btn-primary" routerLinkActive="active">View All Players</a>
     </li>
+    <li >
+        <a routerLink="/user/register" class="btn btn-primary" routerLinkActive="active">Create Logins</a>
+    </li>
     
     <ul>
         <li>
-            <a routerLink="/" class="btn btn-danger" routerLinkActive="active">Logout</a>
+            <a routerLink="/" class="btn btn-danger" routerLinkActive="active" (click)="logout()">Logout</a>
         </li>
         
     </ul>

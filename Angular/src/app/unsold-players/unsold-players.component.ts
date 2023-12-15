@@ -3,6 +3,7 @@ import { player } from '../add-players/player';
 import { PlayerService } from '../player.service';
 import { team } from '../create-team/team';
 import { TeamsService } from '../teams.service';
+import { TeamDto } from '../teams/TeamDto';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class UnsoldPlayersComponent {
 
 
   player:player[]={} as player[];
-  fordemo:team[]={} as team[];
+  fordemo:TeamDto;
   selected:number;
   Selectedplayer:player={} as player;
  msg:string;
@@ -26,10 +27,12 @@ export class UnsoldPlayersComponent {
       console.log(this.player)
     })
 
-    this.tservice.getTeams().subscribe((data)=>{
+    this.tservice.getMyTeam().subscribe((data)=>{
     this.fordemo=data
+    this.selected=this.fordemo.id
     console.log(this.fordemo)
   }
+  
   )
   }
 

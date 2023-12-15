@@ -23,7 +23,8 @@ export class LogincomponentComponent implements OnInit{
   ngOnInit()
   {
     this.form=this.formbuilder.group({
-      userName:['',[Validators.required,Validators.minLength(5)]],
+      
+       userName:['',[Validators.required,Validators.minLength(4)]],
       Password:['',[Validators.required,Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{5,12}$")]]
     })
     
@@ -49,8 +50,9 @@ export class LogincomponentComponent implements OnInit{
 
     this.service.login(this.user).subscribe(
       (res:any)=>{
-       
-      alert("login Success")
+       localStorage.setItem('token',res)
+      console.log(localStorage.getItem('token'))
+      console.log(res);
       this.router.navigate(['/dashboard']);
     },(error)=>{
       console.log(error.error)

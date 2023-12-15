@@ -25,6 +25,7 @@ constructor(private service:TeamsService,private activated:ActivatedRoute,privat
 ngOnInit(){
    
   this.service.getTeam(this.id).subscribe(data=>{
+    console.log(data)
     this.team=data;
   })
 }

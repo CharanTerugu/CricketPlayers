@@ -1,6 +1,6 @@
 <body><app-navbar></app-navbar>
 <table class="center "> 
-  <span><p style="color: red; font-style: italic;" *ngIf="msg!=null;else next">{{msg}}</p>
+  <span><p style="color: red; font-style: italic;background-color: blue;align-items: center;" *ngIf="msg!=null;else next">{{msg}}</p>
     <ng-template #next>
       <p style="color:green; font-style: italic;">{{success}}</p>
     </ng-template></span>
@@ -12,7 +12,7 @@
          <th>Country</th>
          <th>Age</th>
          <th>Bid Price</th>
-         <th colspan="2">Select Team</th>
+         <th colspan="2">Actions</th>
         </tr>
       <tr  *ngFor="let p of player;index as i" >
         <td>{{i+1}}</td>
@@ -22,8 +22,8 @@
          <td>{{p.country}}</td>
          <td>{{p.age}}</td>
          <td>{{p.bidPrice}}</td>
-         <td>
-          <div>
+         <td><button class="btn-success" (click)="purchase(p)">Buy Player</button>
+          <!-- <div>
           <select  [(ngModel)]="selected" >  
             
             <option [ngValue]="s.id" *ngFor="let s of fordemo"> {{s.teamName}} </option>  
@@ -31,7 +31,7 @@
       </div>
         <div *ngIf="selected!=null">
             <button class="btn-success" (click)="purchase(p)">Buy</button>
-          </div>
+          </div> -->
         </td>
          <!-- <td><button class=" btn-1 btn-danger" type="button" (click)="delete(p.id)" >Delete</button></td> -->
          </tr> 

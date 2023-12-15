@@ -1,10 +1,10 @@
 export class admin{
-    name:String;
+    userName:String;
     password:String;
 
-    constructor(name,password)
+    constructor(userName,password)
     {
-        this.name=name;
+        this.userName=userName;
         this.password=password;
     }
 }

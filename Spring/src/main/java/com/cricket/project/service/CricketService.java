@@ -27,6 +27,8 @@ public interface CricketService {
     Cricketer getPlayer(int id);
     List<Cricketer> getUnAssignedPlayers();
     void addPlayer(Cricketer player) throws PlayerAlreadyExsists;
-    void addPlayerToTeam(int tid,int pid) throws TeamNotFound, MessagingException;
+    void addPlayerToTeam(int tid,int pid) throws TeamNotFound, MessagingException, NotEnoughAmount;
   void deletePlayer(int id);
+ List<Cricketer> getMyPlayers(String userName) throws TeamNotFound;
+  
 }

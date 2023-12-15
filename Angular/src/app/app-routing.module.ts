@@ -15,6 +15,8 @@ import { AdminloginComponent } from './adminlogin/adminlogin.component';
 import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
 import { ViewTeamsUserComponent } from './view-teams-user/view-teams-user.component';
 import { AdminAllPlayersComponent } from './admin-all-players/admin-all-players.component';
+import { PlayersComponent } from './players/players.component';
+import { CreateLoginsComponent } from './create-logins/create-logins.component';
 
 const routes: Routes = [
   {
@@ -84,6 +86,14 @@ const routes: Routes = [
   {
     path:'admin/AllPlayers',
     component:AdminAllPlayersComponent
+  },
+  {
+    path:'user/players',
+    component:PlayersComponent
+  },
+  {
+    path:'user/register',
+    component:CreateLoginsComponent
   }
 ];
 
