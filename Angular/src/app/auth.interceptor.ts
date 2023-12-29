@@ -10,7 +10,7 @@ import {
 } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 import { LoginService } from './login.service';
-import { jwtDecode } from 'jwt-decode';
+import  jwtDecode  from 'jwt-decode';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -22,31 +22,6 @@ export class AuthInterceptor implements HttpInterceptor {
     const token = localStorage.getItem('token');
 
  
-    // if (token) {
-
-    //   const clonedReq = req.clone({
- 
-    //     headers: req.headers.set('Authorization', 'Bearer ' + token)
- 
-    //   });
- 
-    //   return next.handle(clonedReq);
- 
-    // } else {
- 
-    //   return next.handle(req);
- 
-    // }
-
-    // return next.handle(req).pipe(
-    //   catchError((error:HttpErrorResponse)=>{
-    //     if(error.status==401 && error.error.message==='Token expired'){
-    //     this.logservice.logout();
-    //     }
-    //     return throwError(error);
-
-    //   })
-    // );
 
     if(token){
       const isTokenExpired=this.isTokenExpired(token);

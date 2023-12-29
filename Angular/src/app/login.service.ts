@@ -13,7 +13,7 @@ export class LoginService {
 
 baseurl="http://localhost:8080"
   constructor(private httpclient:HttpClient,private router:Router) { }
-
+logged:boolean=false;
 
   login(user:login):Observable<any>
   {
@@ -31,6 +31,8 @@ baseurl="http://localhost:8080"
  }
 
  logout():void{
+  this.logged=false;
+  localStorage.clear();
  this.router.navigate(['/login'])
  }
 

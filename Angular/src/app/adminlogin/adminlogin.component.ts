@@ -4,6 +4,7 @@ import { login } from '../logincomponent/login';
 import { Router } from '@angular/router';
 import { LoginService } from '../login.service';
 import { admin } from './admin';
+import jwtDecode from 'jwt-decode';
 
 @Component({
   selector: 'app-adminlogin',
@@ -51,9 +52,20 @@ export class AdminloginComponent {
     this.service.admin(this.admin).subscribe(
       (res:any)=>{
         localStorage.setItem('token',res)
+        this.service.logged=true;
         console.log(res)
       // alert("login Success")
-      this.router.navigate(['/adminDashboard']);
+      const result= jwtDecode(localStorage.getItem('token'))
+   const userRoles=(result as any).roles;
+   console.log(userRoles);
+   if(userRoles[0].authority=="ROLE_ADMIN"){
+    this.router.navigate(['/adminDashboard']);
+  }
+  else{
+    alert("dont have authority")
+    this.router.navigate(['/'])
+  }
+     
     },(error)=>{
       console.log(error.error)
       this.msg=error.error;

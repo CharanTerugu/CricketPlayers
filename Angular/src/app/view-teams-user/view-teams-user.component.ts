@@ -12,7 +12,7 @@ import { TeamDto } from '../teams/TeamDto';
 export class ViewTeamsUserComponent {
 
   
-  // demo:team[]={} as team[];
+
   demo:TeamDto;
   msg:String;
   constructor(private service:TeamsService,private router:Router)
@@ -21,13 +21,10 @@ export class ViewTeamsUserComponent {
   }
   ngOnInit()
   {
-//  this.service.getTeams().subscribe((data)=>{
-//   this.demo=data;
-//   console.log(this.demo);
-//  });
       this.service.getMyTeam().subscribe((data)=>{
         this.demo=data;
         console.log(this.demo)
       })
+      
   }
 }

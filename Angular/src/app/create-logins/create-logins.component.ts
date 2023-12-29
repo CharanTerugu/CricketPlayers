@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { user } from './User';
-import { NgModel } from '@angular/forms';
+import { FormBuilder, FormGroup, NgModel, Validators } from '@angular/forms';
 import { TeamsService } from '../teams.service';
 import { TeamDto } from '../teams/TeamDto';
 import { LoginService } from '../login.service';
@@ -16,7 +16,9 @@ export class CreateLoginsComponent {
   user:user={} as user
   fordemo:TeamDto[]={} as TeamDto[];
   selected:number;
-  constructor(private tservice:TeamsService,private service:LoginService)
+  form:FormGroup;
+  submitted=false;
+  constructor(private tservice:TeamsService,private service:LoginService,private formbuilder:FormBuilder)
   {
     
 
@@ -27,6 +29,18 @@ export class CreateLoginsComponent {
 
   
   )
+  }
+  ngOnInit()
+  {
+    this.form=this.formbuilder.group({
+      name:['',[Validators.required,Validators.minLength(5)]],
+      password:['',[Validators.required,Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{5,12}$")]]
+    })
+    
+  }
+  get f()
+  {
+    return this.form.controls;
   }
   onDropdownChange(event:any){
  

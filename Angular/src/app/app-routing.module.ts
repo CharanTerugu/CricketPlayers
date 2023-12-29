@@ -17,6 +17,7 @@ import { ViewTeamsUserComponent } from './view-teams-user/view-teams-user.compon
 import { AdminAllPlayersComponent } from './admin-all-players/admin-all-players.component';
 import { PlayersComponent } from './players/players.component';
 import { CreateLoginsComponent } from './create-logins/create-logins.component';
+import { RouteGaurdServiceService } from './route-gaurd-service.service';
 
 const routes: Routes = [
   {
@@ -29,71 +30,87 @@ const routes: Routes = [
   },
   {
     path:'dashboard',
-    component:DashboardComponent
+    component:DashboardComponent,
+    canActivate:[RouteGaurdServiceService]
   },
   {
      path:'showteam',
-     component:TeamsComponent
+     component:TeamsComponent,
+     canActivate:[RouteGaurdServiceService]
   },
   {
     path:"createteam",
-    component:CreateTeamComponent
+    component:CreateTeamComponent,
+    canActivate:[RouteGaurdServiceService]
   }
   ,
   {
     path:'updateTeam/:id',
-    component:EditTeamComponent
+    component:EditTeamComponent,
+    canActivate:[RouteGaurdServiceService]
   }
   ,
   {
     path:'addPlayer/:id',
-    component:AddPlayersComponent
+    component:AddPlayersComponent,
+    canActivate:[RouteGaurdServiceService]
   }
   ,
   {
     path:'viewPlayers/:id',
-    component:ViewPlayersComponent
+    component:ViewPlayersComponent,
+    canActivate:[RouteGaurdServiceService]
   },
   {
     path:'updatePlayer/:id',
-    component:UpdatePlayerComponent
+    component:UpdatePlayerComponent,
+    canActivate:[RouteGaurdServiceService]
   },
   {
     path:'addPlayer',
-    component:AddPlayerFromDashboardComponent
+    component:AddPlayerFromDashboardComponent,
+    canActivate:[RouteGaurdServiceService]
   },
 
   {
        path:'viewPlayers',
-       component:UnsoldPlayersComponent
+       component:UnsoldPlayersComponent,
+       canActivate:[RouteGaurdServiceService]
   },
   {
     path:'allPlayers',
-    component:AllPlayersComponent
+    component:AllPlayersComponent,
+    canActivate:[RouteGaurdServiceService]
   },
   {
     path:'admin',
-    component:AdminloginComponent
+    component:AdminloginComponent,
+    
   },
   {
     path:'adminDashboard',
-    component:AdmindashboardComponent
+    component:AdmindashboardComponent,
+    canActivate:[RouteGaurdServiceService]
   },
   {
     path:'user/Teams',
-    component:ViewTeamsUserComponent
+    component:ViewTeamsUserComponent,
+    canActivate:[RouteGaurdServiceService]
   },
   {
     path:'admin/AllPlayers',
-    component:AdminAllPlayersComponent
+    component:AdminAllPlayersComponent,
+    canActivate:[RouteGaurdServiceService]
   },
   {
     path:'user/players',
-    component:PlayersComponent
+    component:PlayersComponent,
+    canActivate:[RouteGaurdServiceService]
   },
   {
     path:'user/register',
-    component:CreateLoginsComponent
+    component:CreateLoginsComponent,
+    canActivate:[RouteGaurdServiceService]
   }
 ];
 

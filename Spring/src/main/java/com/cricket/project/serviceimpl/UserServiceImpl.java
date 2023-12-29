@@ -70,5 +70,11 @@ public class UserServiceImpl implements UserService{
 		return repo.findByName(userName);
 	}
 
+	@Override
+	public void saveUser(User user) {
+		// TODO Auto-generated method stub
+		repo.save(user);
+	}
+
 
 }

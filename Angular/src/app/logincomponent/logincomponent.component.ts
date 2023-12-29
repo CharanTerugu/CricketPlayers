@@ -3,6 +3,8 @@ import {FormGroup, Validators,FormBuilder} from '@angular/forms'
 import { Router } from '@angular/router';
 import { login } from './login';
 import { LoginService } from '../login.service';
+import jwtDecode from 'jwt-decode';
+
 
 @Component({
   selector: 'app-logincomponent',
@@ -33,6 +35,7 @@ export class LogincomponentComponent implements OnInit{
   {
     return this.form.controls;
   }
+  
   onSubmit()
   {
   
@@ -50,10 +53,20 @@ export class LogincomponentComponent implements OnInit{
 
     this.service.login(this.user).subscribe(
       (res:any)=>{
-       localStorage.setItem('token',res)
-      console.log(localStorage.getItem('token'))
-      console.log(res);
-      this.router.navigate(['/dashboard']);
+localStorage.setItem('token',res)
+        this.service.logged=true;
+        // const result= this.decodeToken(localStorage.getItem('token'))
+const result= jwtDecode(localStorage.getItem('token'))
+   const userRoles=(result as any).roles;
+   console.log(userRoles);
+   if(userRoles[0].authority=="ROLE_USER"){
+     this.router.navigate(['/dashboard']);
+  }
+  else{
+    alert("you dont have authority")
+    this.router.navigate(['/'])
+  }
+     
     },(error)=>{
       console.log(error.error)
       this.msg=error.error;
@@ -67,3 +80,6 @@ export class LogincomponentComponent implements OnInit{
 
   }
 }
+
+
+

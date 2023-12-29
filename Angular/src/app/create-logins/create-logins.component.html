@@ -1,13 +1,14 @@
 
 <app-admin-nav-bar></app-admin-nav-bar>
 <html>
+    
 <div class="container">
     <div class="form">
     <h2 id="team">Register User</h2>
-    <form  (ngSubmit)="onSubmit()">
+    <form (ngSubmit)="onSubmit()">
     <label for="name">User Name</label>
     <div class="form-group">
-    <input type="text" id="name" name="name"  [(ngModel)]="user.userName" class="form-control" >
+    <input type="text" id="name" name="name"  [(ngModel)]="user.userName" class="form-control" required>
     
 </div>
     
@@ -25,7 +26,7 @@
 </div>
 <label for="password">password</label>
 <div class="form-group">
-<input type="password" id="password" name="password" class="form-control" [(ngModel)]="user.password">
+    <input type="text" id="password" name="password" [ngModel]="user.password">
 
 </div>
 <label for="roles">Roles</label>

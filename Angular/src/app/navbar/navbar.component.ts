@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,7 +8,10 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
 
+  constructor(private service:LoginService){
+
+  }
   logout(){
-    localStorage.clear();
+    this.service.logout();
   }
 }

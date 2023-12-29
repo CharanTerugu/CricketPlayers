@@ -15,4 +15,6 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 
 	@Query("select u from user u where u.userName=?1")
 	Optional<User> findByName(String userName);
+
+	boolean existsByUserName(String string);
 }

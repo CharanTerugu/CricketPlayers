@@ -17,4 +17,5 @@ public interface UserService {
 	void signup(User user,int teamId) throws UserAlreadyReported, TeamNotFound;
 	void buyTeam(String userName,int teamId) throws UserAlreadyReported, TeamNotFound;
 	Optional<User> getDetailsByUserName(String userName);
+	void saveUser(User user);
 }
